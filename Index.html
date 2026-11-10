@@ -1,0 +1,2947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Eagle x11 | Next-Gen Gaming - Platform</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --primary: #00aaff;
+            --secondary: #bd00ff;
+            --success: #00ff88;
+            --accent-pink: #ff00c8;
+            --bg: #030303;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            overflow-x: hidden;
+            background-image: url('https://i.ibb.co/Qj8BBR2K/IMG-20251006-WA0001.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .overlay {
+            background: linear-gradient(180deg, rgba(3, 3, 3, 0.9) 0%, rgba(3, 3, 3, 0.98) 100%);
+            min-height: 100vh;
+        }
+
+        /* --- White Shimmer Sweep Effect --- */
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: skewX(-25deg);
+            animation: shimmerEffect 3s infinite;
+        }
+        @keyframes shimmerEffect {
+            0% { left: -150%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* --- Header Logo --- */
+        .logo-wrap { padding: 50px 0 20px; display: flex; justify-content: center; }
+        .logo-main {
+            width: 90px; height: 90px; border-radius: 50%;
+            border: 3px solid var(--primary);
+            transition: 0.5s var(--elastic);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 170, 255, 0.2);
+        }
+        .logo-main:hover { transform: translateY(-15px) scale(1.1); box-shadow: 0 30px 60px rgba(0, 170, 255, 0.5); }
+
+        /* --- Hero Section --- */
+        .hero { padding: 20px; text-align: center; }
+        .hero h1 {
+            font-weight: 800; font-size: clamp(2.2rem, 8vw, 3rem);
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Portrait Phone --- */
+        .phone-case {
+            width: 250px; height: 520px; margin: 40px auto;
+            background: #000; border: 10px solid #1a1a1a; border-radius: 40px;
+            overflow: hidden; transition: 0.6s var(--elastic);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+        .phone-case:hover { transform: translateY(-20px) rotateX(5deg); box-shadow: 0 40px 80px rgba(0, 170, 255, 0.2); }
+        .slider-wrap { display: flex; height: 100%; transition: 1s cubic-bezier(0.8, 0, 0.2, 1); }
+        .slider-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- Buttons --- */
+        .btn-box { display: flex; flex-direction: column; gap: 15px; align-items: center; padding: 0 25px; }
+        .btn-premium {
+            width: 100%; max-width: 340px; padding: 18px; border-radius: 18px;
+            text-decoration: none; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; display: flex; align-items: center; justify-content: center;
+            gap: 12px; transition: 0.4s var(--elastic); border: none;
+        }
+        .btn-premium:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .btn-dl { background: linear-gradient(45deg, var(--primary), #0051ff); color: #fff; box-shadow: 0 10px 20px rgba(0, 170, 255, 0.3); }
+        .btn-site { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        
+        /* --- Dynamic Developer Button --- */
+        .btn-dev {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            transition: all 0.5s ease;
+        }
+        .btn-dev.alt-style {
+            border-color: var(--accent-pink);
+            color: var(--accent-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 200, 0.2);
+        }
+
+        /* --- Bento Stats --- */
+        .stats-bento { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 50px 20px; }
+        .stat-card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            padding: 30px 15px; border-radius: 24px; transition: 0.5s var(--elastic);
+            text-align: left; backdrop-filter: blur(10px); cursor: pointer;
+        }
+        .stat-card:hover { transform: translateY(-15px); background: rgba(255, 255, 255, 0.08); }
+        .stat-card h2 { font-size: 2rem; font-weight: 800; margin-bottom: 5px; transition: 0.3s; }
+        .stat-dl:hover h2 { color: var(--primary); }
+        .stat-user:hover h2 { color: var(--secondary); }
+        .stat-likes:hover h2 { color: var(--success); }
+
+        /* --- Core Features --- */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; padding: 0 20px 60px; }
+        .feat-card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.03);
+            padding: 25px 15px; border-radius: 22px; transition: 0.4s var(--elastic);
+            text-align: center; cursor: pointer;
+        }
+        .feat-card:hover { transform: translateY(-12px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0, 170, 255, 0.15); }
+        .feat-card i { font-size: 2rem; color: var(--primary); margin-bottom: 12px; display: inline-block; }
+        .feat-card h4 { font-size: 0.85rem; font-weight: 700; color: #fff; }
+
+        /* --- Modal Popup --- */
+        #featureModal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: none; align-items: center;
+            justify-content: center; z-index: 9999; padding: 20px; backdrop-filter: blur(10px);
+        }
+        .modal-content {
+            background: #111; border: 2px solid var(--primary); padding: 30px;
+            border-radius: 25px; max-width: 400px; text-align: center;
+            animation: modalIn 0.4s var(--elastic);
+        }
+        @keyframes modalIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-content h3 { color: var(--primary); margin-bottom: 15px; font-weight: 800; }
+        .modal-content p { color: #ccc; font-size: 0.95rem; line-height: 1.6; }
+        .close-btn { margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; }
+
+        /* --- Motivational Footer --- */
+        footer { padding: 60px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.4); }
+        .motivation-text {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: block;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+            animation: pulseText 2s infinite ease-in-out;
+        }
+        @keyframes pulseText {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .footer-copy { color: #444; font-size: 0.75rem; font-weight: 700; margin-top: 20px; display: block; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+      
+/* --- 3D Rotating Phone Image Slider --- */
+.phone-case {
+    width: 250px;
+    height: 520px;
+    margin: 40px auto;
+    background: #000;
+    border: 10px solid #1a1a1a;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    will-change: transform;
+
+    animation: phone3DRotate 5s ease-in-out infinite;
+}
+
+@keyframes phone3DRotate {
+    0%, 100% {
+        transform: perspective(1000px)
+                   rotateY(-9deg)
+                   rotateX(3deg)
+                   translateY(0);
+    }
+
+    50% {
+        transform: perspective(1000px)
+                   rotateY(9deg)
+                   rotateX(-2deg)
+                   translateY(-8px);
+    }
+}
+
+.slider-wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.slider-wrap img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+/* Logo square box with orange glow */
+.logo-wrap {
+    padding: 50px 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* LOGO CONTAINER */
+.logo-wrap {
+    position: relative;
+    isolation: isolate;
+    padding: 50px 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* GLOW ONLY BEHIND THE SQUARE LOGO */
+.logo-wrap::before {
+    content: "";
+    position: absolute;
+    width: 340px;
+    height: 280px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 15%,
+            rgba(0, 191, 255, 0.75) 0%,
+            rgba(0, 191, 255, 0.35) 30%,
+            transparent 65%
+        ),
+        radial-gradient(
+            ellipse at 50% 85%,
+            rgba(255, 114, 0, 0.8) 0%,
+            rgba(255, 114, 0, 0.35) 35%,
+            transparent 70%
+        );
+
+    filter: blur(28px);
+    animation: logoLightRise 3s ease-in-out infinite alternate;
+}
+
+/* SQUARE LOGO */
+.logo-main {
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    border-radius: 22px;
+    object-fit: cover;
+    border: 2px solid #FF7200;
+
+    box-shadow: 0 0 15px rgba(255, 114, 0, 0.45);
+    transition: transform 0.4s ease;
+}
+
+.logo-main:hover {
+    transform: scale(1.06);
+}
+
+/* LIGHT MOVES UPWARD */
+@keyframes logoLightRise {
+    0% {
+        opacity: 0.55;
+        transform: translate(-50%, -42%) scale(0.85);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -58%) scale(1.15);
+    }
+}
+/* DOWNLOAD APK - ORANGE BACKGROUND */
+.btn-premium.btn-dl {
+    background: #FF7200 !important;
+    background-image: none !important;
+    color: #FFFFFF !important;
+    border: 1px solid #FF7200 !important;
+    box-shadow: 0 10px 25px rgba(255, 114, 0, 0.4) !important;
+  }
+      
+/* CORE FEATURES ICON COLOUR */
+.feat-card i {
+    font-size: 2rem;
+    color: #00E5C3 !important;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+/* CORE FEATURES HEADING */
+.features-grid {
+    /* Existing grid CSS ko mat badalna */
+}
+
+section h3 {
+    color: #00E5C3 !important;
+      }
+      /* 24/7 SUPPORT TEXT */
+.feat-card h4 {
+    color: #FFFFFF;
+}
+
+.feat-card:has(.bi-headset) h4 {
+    color: #00E5C3 !important;
+}
+
+/* FEATURE ICONS */
+.feat-card i {
+    color: #00E5C3 !important;
+}
+
+/* FEATURE CARD BLUE BORDER/GLOW KO ORANGE KARO */
+.feat-card:hover {
+    border-color: #FF7200 !important;
+    box-shadow: 0 20px 40px rgba(255, 114, 0, 0.15) !important;
+}
+
+/* POPUP KA BLUE BORDER */
+.modal-content {
+    border-color: #FF7200 !important;
+}
+
+/* POPUP HEADING */
+.modal-content h3 {
+    color: #FF7200 !important;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+    background: #FF7200 !important;
+    color: #FFFFFF !important;
+    border-color: #FF7200 !important;
+      }
+
+      /* WhatsApp notification banner */
+#whatsappInfoToast {
+    position: fixed;
+    left: 5%;
+    bottom: 28px;
+    width: 90%;
+    max-width: 620px;
+    min-height: 38px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    background: rgba(14, 16, 27, 0.96);
+    border: 2px solid #00E5C3;
+    border-radius: 999px;
+    color: #FFFFFF;
+    text-decoration: none;
+
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+    box-shadow: 0 0 18px rgba(0, 229, 195, 0.18);
+
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    transition: opacity .25s ease,
+                transform .25s ease,
+                visibility .25s ease;
+}
+
+#whatsappInfoToast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#whatsappInfoToast .toast-emojis {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    font-size: 19px;
+}
+
+#whatsappInfoToast .toast-lightning {
+    color: #00E5C3;
+}
+
+#whatsappInfoToast .toast-whatsapp {
+    color: #25D366;
+}
+
+#whatsappInfoToast .toast-text {
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+#whatsappInfoToast .toast-shortcut {
+    color: #00E5C3;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+@media (max-width: 380px) {
+    #whatsappInfoToast {
+        padding: 10px;
+        gap: 5px;
+        font-size: 11px;
+    }
+
+    #whatsappInfoToast .toast-emojis {
+        gap: 4px;
+        font-size: 16px;
+    }
+                     }
+
+  #whatsappInfoToast {
+    border: 2px solid #00E5C3;
+    box-shadow: 0 0 18px rgba(255, 114, 0, 0.25);
+}
+
+#whatsappInfoToast .toast-shortcut {
+    color: #FF7200;
+    font-weight: 800;
+    white-space: nowrap;
+}
+#whatsappInfoToast {
+    height: 42px;
+    min-height: 42px;
+    padding: 0 12px;
+    box-sizing: border-box;
+      }
+      #completeWithdrawal {
+    margin: 0 20px 35px;
+    padding: 15px;
+    background: rgba(10, 10, 10, 0.94);
+    border: 1px solid #FF7200;
+    border-radius: 15px;
+    box-shadow: 0 0 18px rgba(255, 114, 0, 0.18);
+    overflow: hidden;
+}
+
+.withdraw-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #FF7200;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.withdraw-live {
+    margin-left: auto;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: rgba(255, 114, 0, 0.15);
+    color: #FF7200;
+    font-size: 10px;
+}
+
+.withdraw-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    animation: withdrawSlide .35s ease;
+}
+
+.withdraw-row:last-child {
+    border-bottom: none;
+}
+
+.withdraw-avatar {
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(255,114,0,.15);
+    color: #FF7200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.withdraw-user {
+    flex: 1;
+    min-width: 0;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.withdraw-status {
+    color: #00E5C3;
+    font-size: 10px;
+    margin-top: 4px;
+}
+
+.withdraw-amount {
+    color: #FF7200;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+@keyframes withdrawSlide {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+      
+/* COMPLETE WITHDRAWAL - TICK, NAME, PAID, AMOUNT */
+#completeWithdrawal .withdraw-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+#completeWithdrawal .withdraw-avatar {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #00E5C3 !important;
+    color: #07110F !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+#completeWithdrawal .withdraw-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    gap: 8px;
+}
+
+#completeWithdrawal .withdraw-user {
+    flex: 0 1 auto;
+    min-width: 0;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+#completeWithdrawal .withdraw-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0 !important;
+    padding: 4px 8px;
+    border: 1px solid #FF7200;
+    border-radius: 7px;
+    background: rgba(255, 114, 0, 0.12);
+    color: #FF7200 !important;
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+#completeWithdrawal .withdraw-amount {
+    flex-shrink: 0;
+    margin: 0 !important;
+    color: #00E5C3 !important;
+    font-size: 13px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+@media (max-width: 360px) {
+    #completeWithdrawal .withdraw-row {
+        gap: 7px;
+    }
+
+    #completeWithdrawal .withdraw-info {
+        gap: 5px;
+    }
+
+    #completeWithdrawal .withdraw-user {
+        font-size: 11px;
+    }
+
+    #completeWithdrawal .withdraw-status {
+        padding: 3px 5px;
+        font-size: 9px;
+    }
+}
+
+#completeWithdrawal .withdraw-avatar {
+    width: 17px !important;
+    height: 17px !important;
+    min-width: 17px !important;
+    min-height: 17px !important;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #00E5C3 !important;
+    color: #07110F !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+      
+/* Website Header - Clean CSS */
+.site-top-header {
+    width: 100%;
+    min-height: 68px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #292929;
+    color: #fff;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Square Logo */
+.site-url-box {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background: #202020;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.site-header-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Website Title */
+.site-header-title {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Menu Button */
+.site-menu-button {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    flex-shrink: 0;
+    margin: 0;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font-size: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Dropdown Menu */
+.site-menu-panel {
+    display: none;
+    margin: 0;
+    padding: 12px 16px;
+    background: #202020;
+    border: 0;
+}
+
+.site-menu-panel.open {
+    display: block;
+}
+
+.site-menu-panel a {
+    display: block;
+    margin: 0;
+    padding: 12px 4px;
+    color: #fff;
+    text-decoration: none;
+}
+/* YouTube Giveaway Card */
+.arena-youtube-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: calc(100% - 32px);
+    max-width: 620px;
+    box-sizing: border-box;
+    margin: 28px auto 35px;
+    padding: 38px 22px 34px;
+    text-align: center;
+    border: 1.5px solid rgba(255, 110, 110, 0.9);
+    border-radius: 32px;
+    background: linear-gradient(
+        135deg,
+        #ff101b 0%,
+        #df0000 48%,
+        #a90000 100%
+    );
+    box-shadow:
+        0 0 22px rgba(255, 0, 0, 0.19),
+        inset 0 1px 1px rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+.arena-youtube-card h2 {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 18px;
+    color: #fff;
+    font-size: clamp(21px, 5vw, 29px);
+    line-height: 1.4;
+    font-weight: 900;
+    letter-spacing: 0.2px;
+}
+
+.arena-youtube-card p {
+    position: relative;
+    z-index: 1;
+    max-width: 510px;
+    margin: 0 auto 29px;
+    color: #fff0f0;
+    font-size: clamp(15px, 4vw, 20px);
+    line-height: 1.55;
+}
+
+.arena-yt-button {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 475px;
+    min-height: 64px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 15px 18px;
+    border-radius: 50px;
+    background: #fff;
+    color: #df101b;
+    text-decoration: none;
+    font-size: clamp(15px, 3.8vw, 21px);
+    font-weight: 900;
+    line-height: 1.3;
+    box-shadow: 0 5px 16px rgba(80, 0, 0, 0.18);
+    transition: transform 0.2s ease;
+}
+
+.arena-yt-button:active {
+    transform: scale(0.97);
+}
+
+.arena-yt-button svg {
+    display: block;
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+}
+
+.arena-yt-watermark {
+    position: absolute;
+    z-index: 0;
+    right: 18px;
+    bottom: -35px;
+    color: rgba(255, 255, 255, 0.08);
+    font-size: 160px;
+    line-height: 1;
+    font-weight: 900;
+    pointer-events: none;
+}
+
+@media (max-width: 380px) {
+    .arena-youtube-card {
+        padding: 30px 16px;
+        border-radius: 26px;
+    }
+
+    .arena-youtube-card h2 {
+        font-size: 21px;
+    }
+
+    .arena-yt-button {
+        min-height: 56px;
+        padding: 12px;
+    }
+  }
+      /* WhatsApp Channel Button */
+.btn-premium.btn-site.shimmer-btn {
+    color: #ffffff !important;
+}
+
+/* Button Text */
+.btn-premium.btn-site.shimmer-btn {
+    font-weight: 700;
+}
+
+/* WhatsApp Icon Green */
+.btn-premium.btn-site.shimmer-btn .bi-whatsapp {
+    color: #25D366 !important;
+    font-size: 20px;
+    vertical-align: middle;
+}
+/* ===== EARNING GUIDE SECTION ===== */
+.earning-guide-section {
+    width: 100%;
+    padding: 22px 2px 24px;
+    color: #ffffff;
+    font-family: inherit;
+}
+
+.earning-guide-title {
+    margin: 0 0 26px 3px;
+    font-size: clamp(19px, 4.8vw, 25px);
+    font-weight: 800;
+    line-height: 1.5;
+    letter-spacing: 1.1px;
+    color: #ffffff;
+}
+
+/* Guide Cards */
+.earning-guide-card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 26px 22px 24px 28px;
+    margin-bottom: 22px;
+    background: #101019;
+    border: 1px solid #30303c;
+    border-radius: 34px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+/* Colored left border */
+.earning-guide-card::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    left: 0;
+    width: 5px;
+    border-radius: 0 6px 6px 0;
+}
+
+.earning-card-orange::before {
+    background: linear-gradient(
+        to bottom,
+        #ff4d00,
+        #ff9d00
+    );
+}
+
+.earning-card-cyan::before {
+    background: linear-gradient(
+        to bottom,
+        #00f5cf,
+        #00f
+    );
+}
+
+/* Card heading row */
+.earning-guide-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+.earning-guide-icon {
+    flex: 0 0 80px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1c1c27;
+    border: 2px solid #33333f;
+    border-radius: 25px;
+    font-size: 34px;
+}
+
+.earning-icon-cyan {
+    color: #00eac4;
+}
+
+.earning-icon-gold {
+    color: #ffad16;
+}
+
+.earning-guide-heading h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(16px, 4.2vw, 22px);
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+/* Description — smaller than heading */
+.earning-guide-description {
+    margin: 0;
+    color: #a3a3af;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.85;
+    letter-spacing: 0.15px;
+}
+
+/* Small mobile screens */
+@media (max-width: 380px) {
+    .earning-guide-card {
+        padding: 21px 15px 21px 20px;
+        border-radius: 26px;
+    }
+
+    .earning-guide-icon {
+        flex-basis: 62px;
+        width: 62px;
+        height: 62px;
+        font-size: 28px;
+        border-radius: 20px;
+    }
+
+    .earning-guide-heading {
+        gap: 12px;
+    }
+
+    .earning-guide-description {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+  }
+      .earning-guide-card {
+    width: 100% !important;
+    height: 200px !important;
+    min-height: 200px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+      .earning-card-cyan {
+    width: 100% !important;
+    height: 210px !important;
+    min-height: 210px !important;
+    box-sizing: border-box !important;
+      }
+
+      /* WhatsApp & Telegram buttons above footer */
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 0 16px;
+    margin: 0 auto 28px;
+    box-sizing: border-box;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    flex: 1;
+    max-width: 190px;
+    min-height: 48px;
+    padding: 12px 15px;
+    box-sizing: border-box;
+    border-radius: 14px;
+    background: #15151d;
+    text-decoration: none !important;
+    font-size: 15px;
+    font-weight: 800;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.social-btn:active {
+    transform: scale(0.96);
+}
+
+.social-btn i {
+    font-size: 23px;
+}
+
+/* Original WhatsApp green */
+.social-whatsapp {
+    color: #25D366 !important;
+    border: 1px solid rgba(37, 211, 102, 0.45);
+}
+
+/* Original Telegram blue */
+.social-telegram {
+    color: #0088CC !important;
+    border: 1px solid rgba(0, 136, 204, 0.45);
+}
+
+.social-whatsapp i {
+    color: #25D366 !important;
+}
+
+.social-telegram i {
+    color: #0088CC !important;
+      }
+/* WhatsApp button - Screenshot matching colours */
+.btn-premium.btn-site.shimmer-btn {
+background: #ffffff !important;
+background-image: none !important;
+color: #269B67 !important;
+border: 2px solid #D8E8E0 !important;
+box-shadow: none !important;
+font-weight: 800 !important;
+}
+
+.btn-premium.btn-site.shimmer-btn i {
+color: #269B67 !important;
+}
+
+.btn-premium.btn-site.shimmer-btn:active {
+background: #DDF3E6 !important;
+}
+      
+    </style>
+
+  <style>
+#policyPopup.policy-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(0, 0, 0, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+#policyPopup .policy-card {
+  width: 100%;
+  max-width: 620px;
+  max-height: 82vh;
+  max-height: 82dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  background: #111;
+  border: 3px solid #ff7900;
+  border-radius: 42px;
+  padding: 28px 22px;
+  box-sizing: border-box;
+  color: #ddd;
+  text-align: center;
+}
+
+#policyPopup .policy-card h2 {
+  color: #ff7900;
+  margin: 0 0 20px;
+}
+
+#policyPopup .policy-text {
+  text-align: left;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+  font-size: inherit;
+}
+
+#policyPopup .policy-card button {
+  display: block;
+  margin: 24px auto 0;
+  padding: 16px 42px;
+  border: 0;
+  border-radius: 18px;
+  background: #ff7900;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  #policyPopup .policy-card {
+    max-height: 84vh;
+    max-height: 84dvh;
+    padding: 24px 18px;
+    border-radius: 36px;
+  }
+}
+  </style>
+  <style>
+#policyPopup.policy-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: rgba(0, 0, 0, 0.88);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#policyPopup .policy-card {
+    width: 100%;
+    max-width: 620px;
+    max-height: 84vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #111;
+    color: #ddd;
+    border: 3px solid #ff7900;
+    border-radius: 35px;
+    padding: 25px 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#policyPopup .policy-card h2 {
+    color: #ff7900;
+    font-size: 22px;
+    margin: 0 0 20px;
+}
+
+#policyPopup .policy-text {
+    color: #ddd;
+    text-align: left;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+#policyPopup .policy-card button {
+    display: block;
+    margin: 24px auto 0;
+    padding: 14px 40px;
+    background: #ff7900;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    #policyPopup .policy-card {
+        padding: 22px 16px;
+        border-radius: 28px;
+    }
+}
+    
+#whatsappInfoToast {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 20px !important;
+    transform: translateX(-50%) !important;
+    width: calc(100% - 24px) !important;
+    max-width: 620px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    box-sizing: border-box !important;
+    z-index: 99999 !important;
+    margin: 0 !important;
+}
+
+#whatsappInfoToast .toast-text {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+    font-size: clamp(9px, 3.1vw, 14px) !important;
+}
+
+#whatsappInfoToast .toast-emojis,
+#whatsappInfoToast .toast-shortcut {
+    flex-shrink: 0 !important;
+}
+    /* NONSTOP BATTLE DOWNLOAD CARD */
+.ns-download-card {
+    width: calc(100% - 30px);
+    max-width: 330px;
+    min-height: 440px;
+    box-sizing: border-box;
+    margin: 35px auto 25px;
+    padding: 42px 20px 30px;
+    border: 1px solid #2878ff;
+    border-radius: 21px;
+    background: #0b0f1d;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.ns-download-card .ns-android-icon {
+    font-size: 58px;
+    line-height: 1;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.ns-download-card h2 {
+    margin: 0 0 16px;
+    color: #ffffff;
+    font-size: 27px;
+    line-height: 1.4;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.ns-download-card p {
+    margin: 0 0 32px;
+    color: #a5aec3;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.ns-download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 52px;
+    box-sizing: border-box;
+    padding: 12px 8px;
+    border: 0;
+    border-radius: 5px;
+    background: linear-gradient(100deg, #347dff, #09e7e9);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    animation: nsDownloadPulse 2s infinite;
+}
+
+.ns-download-btn i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+@keyframes nsDownloadPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(0, 225, 255, 0);
+    }
+    50% {
+        box-shadow: 0 0 0 5px rgba(0, 225, 255, 0.20),
+                    0 0 18px rgba(0, 225, 255, 0.30);
+    }
+}
+
+/* Copyright and developer at the bottom */
+.ns-footer {
+    width: 100%;
+    padding: 12px 10px 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.ns-footer .ns-copyright,
+.ns-footer .ns-developed {
+    display: block;
+    margin: 6px 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #a5aec3;
+}
+
+.ns-footer .ns-developed {
+    color: #ffffff;
+    font-weight: 700;
+    }
+
+    
+#siteBackgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: -1;
+    pointer-events: none;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    background-image: none !important;
+    background-color: #050816;
+}
+    
+#siteBackgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: -1;
+    pointer-events: none;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    background-image: none !important;
+    background-color: #050816;
+}
+
+
+#siteBackgroundVideo {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+
+  object-fit: cover !important;
+  object-position: center center !important;
+
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  z-index: -1 !important;
+  pointer-events: none !important;
+  display: block !important;
+}
+
+/* HARD LOCK: Core Features popup */
+html,
+body {
+    overflow-x: hidden !important;
+}
+
+#featureModal {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    padding: 16px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: auto !important;
+    overscroll-behavior: none !important;
+    touch-action: pan-y !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+#featureModal .modal-content,
+#featureModal .modal-content h3,
+#featureModal .modal-content p,
+#featureModal .modal-content .close-btn {
+    position: static !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+#featureModal .modal-content {
+    width: 100% !important;
+    max-width: 400px !important;
+    flex: 0 0 auto !important;
+    margin: auto !important;
+    box-sizing: border-box !important;
+}
+
+/* Disable hover movement on feature cards */
+.feat-card,
+.feat-card:hover,
+.feat-card:active {
+    transform: none !important;
+    translate: none !important;
+    animation: none !important;
+}
+
+  </style>
+
+  <style>
+#siteBackgroundVideo {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+
+    z-index: -1 !important;
+    pointer-events: none !important;
+
+    display: block !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    /* Hide playback controls */
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+#siteBackgroundVideo::-webkit-media-controls,
+#siteBackgroundVideo::-webkit-media-controls-panel,
+#siteBackgroundVideo::-webkit-media-controls-play-button,
+#siteBackgroundVideo::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none !important;
+}
+</style>
+
+</head>
+<body>
+
+  
+<header class="site-top-header">
+
+    <!-- Logo Image -->
+    <div class="site-url-box">
+        <img
+            src="https://i.supaimg.com/ac49c98d-2828-48c0-977c-cd12f9c62634/259b9f53-be31-4633-a1cd-a7ac1de2c9f9.jpg"
+            alt="ESPORTS ARENA Logo"
+            class="site-header-logo"
+        >
+    </div>
+
+    <!-- Website Title -->
+    <div class="site-header-title">
+        EAGLE X11
+    </div>
+
+    <!-- Menu Button -->
+    <button
+        type="button"
+        class="site-menu-button"
+        id="siteMenuButton"
+        aria-label="Open menu"
+        aria-expanded="false"
+    >☰</button>
+
+</header>
+
+  <nav class="site-menu-panel" id="siteMenuPanel">
+    <a href="#top">Home</a>
+
+    <a href="#completeWithdrawal">
+        Complete Withdrawal
+    </a>
+
+    <a href="#features"
+       onclick="document.getElementById('features').scrollIntoView({behavior:'smooth',block:'start'}); document.getElementById('siteMenuPanel').classList.remove('open'); document.getElementById('siteMenuButton').setAttribute('aria-expanded','false');">
+        Features
+    </a>
+
+    <a href="javascript:void(0)"
+       onclick="openPolicyPopup('about'); document.getElementById('siteMenuPanel').classList.remove('open'); document.getElementById('siteMenuButton').setAttribute('aria-expanded','false');">
+        About Us
+    </a>
+
+    <a href="javascript:void(0)"
+       onclick="openPolicyPopup('privacy'); document.getElementById('siteMenuPanel').classList.remove('open'); document.getElementById('siteMenuButton').setAttribute('aria-expanded','false');">
+        Privacy Policy
+    </a>
+
+    <a href="javascript:void(0)"
+       onclick="openPolicyPopup('terms'); document.getElementById('siteMenuPanel').classList.remove('open'); document.getElementById('siteMenuButton').setAttribute('aria-expanded','false');">
+        Terms &amp; Conditions
+    </a>
+
+    <a href="javascript:void(0)"
+       onclick="openPolicyPopup('fairplay'); document.getElementById('siteMenuPanel').classList.remove('open'); document.getElementById('siteMenuButton').setAttribute('aria-expanded','false');">
+        Fair Play Policy
+    </a>
+
+    <a href="javascript:void(0)"
+       onclick="openPolicyPopup('refund'); document.getElementById('siteMenuPanel').classList.remove('open'); document.getElementById('siteMenuButton').setAttribute('aria-expanded','false');">
+        Refund Policy
+    </a>
+
+    <a href="https://t.me/NonStopBattleSupport"
+       target="_blank"
+       rel="noopener noreferrer"
+       onclick="document.getElementById('siteMenuPanel').classList.remove('open'); document.getElementById('siteMenuButton').setAttribute('aria-expanded','false');">
+        Contact Support
+    </a>
+  </nav>
+
+<!-- Duplicate menu removed: use the full menu above. -->
+
+
+    <div class="overlay">
+        <!-- Logo -->
+        <header class="logo-wrap reveal active">
+            <img src="https://i.supaimg.com/ac49c98d-2828-48c0-977c-cd12f9c62634/259b9f53-be31-4633-a1cd-a7ac1de2c9f9.jpg" alt="Logo" class="logo-main">
+        </header>
+
+        <main>
+            <section class="hero reveal active">
+                <h1>Eagle x11</h1>
+                
+<p style="color: #666; font-weight: 500; font-style: italic; margin-top: 10px;">
+    Now Start Your Battle Today - FREE FIRE ESPORTS
+</p>
+
+                <!-- Phone -->
+                <div class="phone-case reveal" id="phoneMockup">
+                    <div class="slider-wrap" id="slider">
+                        <img src="https://i.supaimg.com/ac49c98d-2828-48c0-977c-cd12f9c62634/d829a776-2fc9-45a4-9784-01d7c65ece82.jpg">
+                        <img src="https://i.supaimg.com/ac49c98d-2828-48c0-977c-cd12f9c62634/7dcc8451-1081-4af9-81ee-377ae5449f0f.jpg">
+                        <img src="https://i.supaimg.com/ac49c98d-2828-48c0-977c-cd12f9c62634/561c18f0-a3c1-4fc9-8eac-01423c3225f7.jpg">
+                        <img src="https://i.supaimg.com/ac49c98d-2828-48c0-977c-cd12f9c62634/dcbb2239-30b3-450e-bfd5-5ba54d1254a1.jpg">
+                    </div>
+                </div>
+
+                <!-- Buttons with Shimmer -->
+                <div class="btn-box">
+                    <a href="https://www.mediafire.com/file/hni9s3duny9y0ng/Eagle+x11.apk/file" class="btn-premium btn-dl shimmer-btn">
+                        <i class="bi bi-cloud-arrow-down-fill"></i> Download APK
+                    </a>
+                    <a href="WHATSAPP_CHANNEL_LINK" class="btn-premium btn-site shimmer-btn" target="_blank" rel="noopener noreferrer">  
+    <i class="bi bi-whatsapp"></i> JOIN WhatsApp
+</a>  
+ 
+                    <!-- Dynamic Developer Button -->
+                    <a href="https://t.me/AayushCoreDev" class="btn-premium btn-dev shimmer-btn" id="dynamicDevBtn">
+                        <i class="bi bi-telegram"></i> <span>Contact Developer</span>
+                    </a>
+                </div>
+            </section>
+
+          <!-- Bento Stats -->
+<div class="stats-bento">
+
+    <div class="stat-card stat-dl reveal" style="grid-column: span 2;">
+    <i class="bi bi-download" style="color: var(--primary);"></i>
+    <h2 class="counter" id="totalDownloadsCount">5858</h2>
+    <p>Total Community Downloads</p>
+    </div>
+
+    <div class="stat-card stat-user reveal">
+        <i class="bi bi-people" style="color: var(--secondary);"></i>
+        <h2 class="counter" id="activePlayersCount">5213</h2>
+        <p>Active Players</p>
+    </div>
+
+    <div class="stat-card stat-likes reveal" id="trustLikesCard">
+        <i class="bi bi-heart" id="trustLikeHeart"
+           style="color: var(--success);"></i>
+        <h2 id="trustLikesCount">7172</h2>
+        <p>Trust Likes</p>
+    </div>
+
+</div>
+<!-- End Bento Stats -->
+
+            <!-- Features -->
+          
+<section class="reveal" id="features">
+    <h3 style="margin: 0 25px 25px; color: var(--primary); letter-spacing: 1px; font-weight: 800;">CORE FEATURES</h3>
+
+            
+                <div class="features-grid">
+                    <div class="feat-card" onclick="showDetail('Anti-Cheat', 'Advanced military-grade shield to block all types of hacks and ensures 100% fair play.')">
+                        <i class="bi bi-shield-check"></i>
+                        <h4>ANTI-CHEAT</h4>
+                    </div>
+                    <div class="feat-card" onclick="showDetail('Fast Payout', 'Withdraw your tournament winnings instantly to your UPI. 5-minute processing time.')">
+                        <i class="bi bi-lightning-charge"></i>
+                        <h4>FAST PAYOUT</h4>
+                    </div>
+                    <div class="feat-card" onclick="showDetail('24/7 Support', 'Dedicated support team ready to help you on Telegram and App chat at any time.')">
+                        <i class="bi bi-headset"></i>
+                        <h4>24/7 SUPPORT</h4>
+                    </div>
+                    <div class="feat-card" onclick="showDetail('Refer & Earn', 'Invite your squad and earn real cash rewards for every friend who joins the arena!')">
+                        <i class="bi bi-gift"></i>
+                        <h4>REFER & EARN</h4>
+                    </div>
+                    <div class="feat-card" onclick="showDetail('Leaderboard', 'Rise through the ranks and prove you are the king of the arena. Live tracking available.')">
+                        <i class="bi bi-trophy"></i>
+                        <h4>LEADERBOARD</h4>
+                    </div>
+                    <div class="feat-card" onclick="showDetail('Free Entry', 'Daily practice matches with zero entry fee. Show your skills for free!')">
+                        <i class="bi bi-controller"></i>
+                        <h4>FREE ENTRY</h4>
+                    </div>
+                </div>
+            </section>
+
+          <!-- HOW TO START EARNING SECTION -->
+<section class="earning-guide-section">
+
+    <h2 class="earning-guide-title">
+        🤔 HOW TO START EARNING? 🤑
+    </h2>
+
+    <!-- Step 1 -->
+    <div class="earning-guide-card earning-card-orange">
+        <div class="earning-guide-heading">
+            <div class="earning-guide-icon earning-icon-cyan">
+                <i class="bi bi-person-fill-add"></i>
+            </div>
+            <h3>1. Download &amp; Register</h3>
+        </div>
+
+        <p class="earning-guide-description">
+            Get started with ArenaX! Download the official app,
+            create your account in seconds, and get ready to join
+            exciting gaming competitions.
+        </p>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="earning-guide-card earning-card-cyan">
+        <div class="earning-guide-heading">
+            <div class="earning-guide-icon earning-icon-gold">
+                <i class="bi bi-trophy-fill"></i>
+            </div>
+            <h3>2. Join Leaderboard &amp; Earn</h3>
+        </div>
+
+        <p class="earning-guide-description">
+            Join available matches, show your gaming skills,
+            climb the leaderboard, and win rewards when you
+            achieve the required rank. Play smart and aim for the top!
+        </p>
+    </div>
+
+</section>
+
+          <!-- COMPLETE WITHDRAWAL -->
+<section id="completeWithdrawal">
+    <div class="withdraw-heading">
+        <i class="bi bi-check-circle-fill"></i>
+        COMPLETE WITHDRAWAL
+        <span class="withdraw-live">LIVE</span>
+    </div>
+
+    <div id="withdrawNameList"></div>
+
+</section>
+
+          
+
+        </main>
+
+        <!-- YouTube Giveaway Card -->
+<section class="arena-youtube-card">
+    <div class="arena-yt-watermark">▶</div>
+
+    <h2>🎁 JOIN THE YOUTUBE FAMILY</h2>
+
+    <p>
+        Get tournament alerts, fresh updates, exclusive Voucher
+        codes and exciting giveaway surprises on our channel!
+    </p>
+
+    <a
+        href="https://youtube.com/@surajultraplayz?si=Xr-1NYuRZy7Sb6f7"
+        class="arena-yt-button"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+                d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/>
+        </svg>
+        SUBSCRIBE &amp; GET UPDATES
+    </a>
+</section>
+          
+
+      <!-- WhatsApp Channel Notification -->
+<a
+    id="whatsappInfoToast"
+    href="https://whatsapp.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Join Our WhatsApp Channel for Information"
+>
+    <span class="toast-emojis" aria-hidden="true">
+        <i class="bi bi-lightning-charge-fill toast-lightning"></i>
+        <i class="bi bi-whatsapp toast-whatsapp"></i>
+    </span>
+
+    <span class="toast-text">
+        Join Our WhatsApp Channel for Information
+    </span>
+
+    <span class="toast-shortcut">Join ›</span>
+</a>
+
+        <!-- Feature Details Popup -->
+        <div id="featureModal">
+            <div class="modal-content">
+                <h3 id="modalTitle">Feature Name</h3>
+                <p id="modalDesc">Explanation goes here...</p>
+                <button class="close-btn" onclick="closeDetail()">CLOSE</button>
+            </div>
+        </div>
+
+      <!-- SOCIAL MEDIA LINKS -->
+<div class="social-links">
+    <a href="YOUR_WHATSAPP_LINK"
+       class="social-btn social-whatsapp"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Join WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+        <span>WhatsApp</span>
+    </a>
+
+    <a href="https://t.me/NonstopBattleOfficialSupport"
+       class="social-btn social-telegram"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Join Telegram">
+        <i class="bi bi-telegram"></i>
+        <span>Telegram</span>
+    </a>
+</div>
+
+      <!-- NONSTOP BATTLE DOWNLOAD CARD -->
+<section class="ns-download-card">
+
+    <i class="bi bi-android2 ns-android-icon"
+       aria-hidden="true"></i>
+
+    <h2>DOWNLOAD THE NonStop Battle APP</h2>
+
+    <p>Trusted By Real Players, Built for real Champions</p>
+
+    <a
+        class="ns-download-btn"
+        href="https://www.mediafire.com/file/hni9s3duny9y0ng/Eagle+x11.apk/file"
+        download
+        aria-label="Download NonStop Battle APK"
+    >
+        <i class="bi bi-cloud-arrow-down-fill"></i>
+        DOWNLOAD APK
+    </a>
+
+</section>
+
+        <footer>
+            <span class="motivation-text">Download app and Start Earning 🤑💸 </span>
+            <span class="footer-copy"> NONSTOP BATTLE  &copy; 2026  • Devloped By Aayush Playz... </span>
+        </footer>
+    </div>
+
+    <script>
+
+      // WhatsApp banner: show after 2 seconds,
+// then hide after another 3 seconds.
+(function () {
+    const toast = document.getElementById("whatsappInfoToast");
+    if (!toast) return;
+
+    window.setTimeout(function () {
+        toast.classList.add("show");
+        toast.style.setProperty("display", "flex", "important");
+        toast.style.setProperty("visibility", "visible", "important");
+        toast.style.setProperty("opacity", "1", "important");
+        toast.style.setProperty("pointer-events", "auto", "important");
+
+        window.setTimeout(function () {
+            toast.classList.remove("show");
+            toast.style.setProperty("opacity", "0", "important");
+            toast.style.setProperty("visibility", "hidden", "important");
+            toast.style.setProperty("pointer-events", "none", "important");
+        }, 3000);
+
+    }, 1000);
+})();
+        // Modal Logic
+        function showDetail(title, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('featureModal').style.display = 'flex';
+        }
+        function closeDetail() {
+            document.getElementById('featureModal').style.display = 'none';
+        }
+
+        // Slider
+        const slider = document.getElementById('slider');
+        let idx = 0;
+        setInterval(() => {
+            idx = (idx + 1) % 4;
+            slider.style.transform = `translateX(-${idx * 100}%)`;
+        }, 3000);
+
+        // --- Dynamic Developer Button Color & Text Switcher ---
+        const devBtn = document.getElementById('dynamicDevBtn');
+        const devBtnText = devBtn.querySelector('span');
+        const labels = ["Contact Developer", "Want your own app?"];
+        let labelIdx = 0;
+        
+        setInterval(() => {
+            labelIdx = (labelIdx + 1) % labels.length;
+            
+            // Start Fade out
+            devBtnText.style.opacity = 0;
+            
+            setTimeout(() => {
+                // Change Text
+                devBtnText.innerText = labels[labelIdx];
+                
+                // Toggle Color Class
+                if(labelIdx === 1) {
+                    devBtn.classList.add('alt-style');
+                } else {
+                    devBtn.classList.remove('alt-style');
+                }
+                
+                // Fade in
+                devBtnText.style.opacity = 1;
+            }, 300);
+        }, 2500);
+
+        // Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Counting Logic
+        (function () {
+            "use strict";
+
+            function startCounters() {
+                const counters = document.querySelectorAll(
+                    '.counter[data-target]'
+                );
+
+                if (!counters.length) return;
+
+                // Browser support fallback
+                if (!("IntersectionObserver" in window)) {
+                    counters.forEach(function (el) {
+                        const target = Number(el.dataset.target);
+
+                        if (Number.isFinite(target)) {
+                            el.textContent = Math.floor(target).toLocaleString("en-IN");
+                        }
+                    });
+                    return;
+                }
+
+                const counterObserver = new IntersectionObserver(
+                    function (entries, observer) {
+                        entries.forEach(function (entry) {
+                            if (!entry.isIntersecting) return;
+
+                            const el = entry.target;
+                            const target = Number(el.dataset.target);
+
+                            if (!Number.isFinite(target) || target < 0) {
+                                observer.unobserve(el);
+                                return;
+                            }
+
+                            // Prevent the same counter from animating twice
+                            observer.unobserve(el);
+
+                            const duration = 1200;
+                            const startTime = performance.now();
+
+                            function updateCounter(now) {
+                                const progress = Math.min(
+                                    (now - startTime) / duration,
+                                    1
+                                );
+
+                                const current = Math.floor(target * progress);
+
+                                el.textContent =
+                                    current.toLocaleString("en-IN");
+
+                                if (progress < 1) {
+                                    requestAnimationFrame(updateCounter);
+                                } else {
+                                    el.textContent =
+                                        Math.floor(target).toLocaleString("en-IN");
+                                }
+                            }
+
+                            requestAnimationFrame(updateCounter);
+                        });
+                    },
+                    {
+                        threshold: 0.1
+                    }
+                );
+
+                counters.forEach(function (counter) {
+                    counterObserver.observe(counter);
+                });
+            }
+
+            if (document.readyState === "loading") {
+                document.addEventListener(
+                    "DOMContentLoaded",
+                    startCounters,
+                    { once: true }
+                );
+            } else {
+                startCounters();
+            }
+        })();
+
+      // Automatic demo withdrawal list (no Firebase required)
+(function () {
+    const list = document.getElementById('withdrawNameList');
+    if (!list) return;
+
+    const names = [
+    "Raju Yt",
+    "Aman h4x",
+    "乂Sмᴀʀᴛ ᭄ʙᴏʏ࿐",
+    "CM ×͜× NOBITA",
+    "ＨＥＡＤＳＨＯＴ→⁹⁹⁹ㅤ",
+    "亗ㅤ𝙰𝙻𝙾𝙽𝙴ㅤ𝙱𝙾𝚈 亗",
+    "𓆩𝐋𝐮𝐜𝐤𝐲𓆪 ᶠᶠ★࿐",
+    "CGㅤㅤCANDY",
+    "XD╰‿╯CRIMINAL",
+
+    "Aman FF",
+    "Suraj Gamer",
+    "Rohit YT",
+    "Pro Killer",
+    "Shadow FF",
+    "Ravi Gaming",
+    "Dark Hunter",
+    "Aryan FF",
+    "Lucky Star",
+    "Dev Gamer",
+    "Akash YT",
+    "King Player",
+    "Rajput FF",
+    "Vicky Gaming",
+    "Hero X",
+    "Ninja FF",
+    "Fire Gamer",
+    "Ankit YT",
+    "Legend Pro",
+    "Rocky FF",
+    "Tiger Gaming",
+    "Vikram FF",
+    "King Yt",
+    "Ajjubhai94",
+    "Karan X",
+    "Dragon FF",
+    "Abhi Gamer",
+    "Sahil YT",
+    "Max Player",
+    "Prince FF",
+    "RDX Gaming",
+    "Aadi Gamer",
+    "Thunder X",
+
+    "亗 DARK々KING 亗",
+    "乂ᎷᎡ᭄ᏦᎥᏁᏳ࿐",
+    "么PRO々PLAYER",
+    "꧁༒☬DEVIL☬༒꧂",
+    "『ᏒᎪᎫ』ᏀᎪᎷᎬᏒ",
+    "亗ᏦᎥᏁᏳ᭄ᎪᏞᎾᏁᎬ",
+    "乂ᏞᎬᏀᎬᏁᎠ乂",
+    "꧁༺SHADOW༻꧂",
+    "么ᎠᎪᎡᏦ ᏦᎥᏁᏳ",
+    "ᎷᎡ᭄ᎡᎪᎻႮᏞ",
+    "亗ᏒᎠX ᏦᎥᏁᏳ",
+    "꧁ঔৣ☬KILLER☬ঔৣ꧂",
+    "乂ᏢᎡᎾ ᏦᎥᏁᏳ乂",
+    "ᏞᎾᏚᎬᎡ々ᏴᎾY",
+    "亗ᎠᎬᎪᎠᏚᎻᎾᎢ",
+    "꧁༒RDX༒꧂",
+    "乂ᏚᎷᎪᎡᎢ ᏴᎾY",
+    "ᎷᎡ᭄ᏞႮᏟᏦY",
+    "亗ᎪᏞᎾᏁᎬ ᏦᎥᏁᏳ",
+    "꧁༺ᎠᎬᏙᎥᏞ༻꧂",
+
+    "Headshot King",
+    "One Tap King",
+    "Rush Master",
+    "Clutch God",
+    "Sniper Boss",
+    "Booyah Hunter",
+    "Solo Warrior",
+    "Squad Destroyer",
+    "No Mercy FF",
+    "Toxic Player",
+    "Aim Master",
+    "Bullet King",
+    "Ghost Rider",
+    "Night Hunter",
+    "Silent Killer",
+    "Storm Breaker",
+    "Venom Gaming",
+    "Blaze FF",
+    "Frost Gamer",
+    "Inferno X",
+    "Phantom FF",
+    "Savage Boy",
+    "Elite Warrior",
+    "Ultra Gamer",
+    "Royal Killer",
+    "Alpha Gaming",
+    "Omega FF",
+    "Predator X",
+    "Viper Gaming",
+    "Falcon FF",
+
+    "OP RAHUL",
+    "OP AMAN",
+    "OP SURAJ",
+    "OP ROHIT",
+    "OP RAVI",
+    "OP VICKY",
+    "OP ARYAN",
+    "OP DEV",
+    "OP ANKIT",
+    "OP PRINCE",
+    "OP SAHIL",
+    "OP ROCKY",
+    "OP AKASH",
+    "OP KARAN",
+    "OP ABHI",
+    "OP AADI",
+    "OP RAJ",
+    "OP NINJA",
+    "OP LEGEND",
+    "OP HUNTER",
+
+    "Gaming With Rahul",
+    "Aman Live",
+    "Suraj Plays",
+    "Rohit Gaming",
+    "Ravi Live YT",
+    "Aryan Plays",
+    "Vicky Live",
+    "Dev OP",
+    "Ankit Gaming",
+    "Prince Plays",
+    "Sahil Live",
+    "Rocky Gaming",
+    "Akash Plays",
+    "Karan Gaming",
+    "Abhi Live",
+    "Aadi Plays",
+    "Raj Gaming",
+    "Ninja Live",
+    "Legend YT",
+    "Hunter Gaming",
+
+    "亗ㅤᏢᎡᎾ ᏀᎪᎷᎬᎡ",
+    "乂ᏴᏞᎪᏟᏦ ᏢᎪᏁᎢᎻᎬᎡ",
+    "꧁༒ᏒᎾᎽᎪᏞ༒꧂",
+    "么ᏚᏢᎬᎬᎠ ᏦᎥᏁᏳ",
+    "亗ᎻᎪᎡᎠ ᏀᎪᎷᎬᎡ",
+    "乂ᎠᎪᎡᏦ ᎪᏁᏀᎬᏞ",
+    "꧁༺ᏚᎪᏙᎪᏀᎬ༻꧂",
+    "亗ᎢᎻᎬ ᏞᎬᏀᎬᏁᎠ",
+    "乂ᎡᎾᎽᎪᏞ ᏴᎾY",
+    "꧁༒ᏦᎥᏁᏳ ᎾᏢ༒꧂",
+
+    "Pixel Warrior",
+    "Cyber Ninja",
+    "Neon Gamer",
+    "Turbo FF",
+    "Quantum X",
+    "Rogue Player",
+    "Cosmic Gamer",
+    "Zero Recoil",
+    "Aim Legend",
+    "Quick Scope",
+    "Bullet Storm",
+    "Final Boss",
+    "Game Changer",
+    "Top Fragger",
+    "Pro Legend",
+    "Victory X",
+    "Epic Gamer",
+    "Royal Squad",
+    "Fearless FF",
+    "Ultimate OP"
+];
+
+    // Create 520 unique demo names without duplicate entries.
+    const demoNames = [];
+    const uniqueNames = [...new Set(names)];
+
+    for (let i = 0; i < 520; i++) {
+        const base = uniqueNames[i % uniqueNames.length];
+        const suffix = Math.floor(i / uniqueNames.length) + 1;
+
+        demoNames.push(
+            i < uniqueNames.length ? base : base + " " + suffix
+        );
+    }
+
+    // Shuffle names.
+    for (let i = demoNames.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [demoNames[i], demoNames[j]] =
+            [demoNames[j], demoNames[i]];
+    }
+
+    let index = 0;
+
+    
+function addRow() {
+    const name = demoNames[index % demoNames.length];
+    index++;
+
+    const row = document.createElement('div');
+    row.className = 'withdraw-row';
+
+    // Green tick icon
+    const avatar = document.createElement('div');
+    avatar.className = 'withdraw-avatar';
+
+    const tick = document.createElement('i');
+    tick.className = 'bi bi-check-lg';
+    avatar.appendChild(tick);
+
+    // Username
+    const info = document.createElement('div');
+    info.className = 'withdraw-info';
+
+    const username = document.createElement('div');
+    username.className = 'withdraw-user';
+    username.textContent = name;
+
+    // Orange PAID badge (no dot)
+    const status = document.createElement('span');
+    status.className = 'withdraw-status';
+    status.textContent = 'PAID';
+
+    info.append(username, status);
+
+    // Amount on the right
+    const amounts = [
+        50, 70, 100, 130, 150, 200, 250, 300,
+        500, 550, 800, 900, 1000, 1200, 1500,
+        2000, 2500, 5000
+    ];
+
+    const amount = document.createElement('div');
+    amount.className = 'withdraw-amount';
+
+    amount.textContent = '₹' +
+        amounts[Math.floor(Math.random() * amounts.length)];
+
+    // Append in the required order
+    row.append(avatar, info, amount);
+    list.prepend(row);
+
+    // Show only 5 rows
+    while (list.children.length > 5) {
+        list.lastElementChild.remove();
+    }
+}
+
+for (let i = 0; i < 5; i++) {
+    addRow();
+}
+
+setInterval(addRow, 3500);
+})();
+
+      
+(function () {
+    const button = document.getElementById('siteMenuButton');
+    const panel = document.getElementById('siteMenuPanel');
+
+    if (!button || !panel) return;
+
+    button.addEventListener('click', function () {
+        const isOpen = panel.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+        button.textContent = isOpen ? '×' : '☰';
+    });
+
+    panel.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+            panel.classList.remove('open');
+            button.setAttribute('aria-expanded', 'false');
+            button.textContent = '☰';
+        });
+    });
+})();
+
+
+
+ // TRUST LIKES: Allow liking again after returning to page
+(function () {
+    const heart = document.getElementById("trustLikeHeart");
+    const countEl = document.getElementById("trustLikesCount");
+
+    if (!heart || !countEl) return;
+
+    const COUNT_KEY = "trustLikesCount_v1";
+    const LIKED_KEY = "trustLikesClicked_v1";
+
+    let count = 7172;
+    let liked = false;
+
+    try {
+        const savedCount = localStorage.getItem(COUNT_KEY);
+
+        if (savedCount !== null && Number.isFinite(Number(savedCount))) {
+            count = Math.max(0, Number(savedCount));
+        } else {
+            count = Number(countEl.textContent.replace(/,/g, "")) || 7172;
+        }
+
+        // Har baar page dobara khulne par like reset
+        localStorage.setItem(LIKED_KEY, "no");
+    } catch (error) {
+        console.error("Trust Likes storage error:", error);
+    }
+
+    function updateHeart() {
+        countEl.textContent = count.toLocaleString("en-US");
+
+        heart.classList.toggle("bi-heart-fill", liked);
+        heart.classList.toggle("bi-heart", !liked);
+        heart.style.color = liked ? "#e5395b" : "var(--success)";
+        heart.style.cursor = "pointer";
+
+        heart.style.setProperty("visibility", "visible", "important");
+        countEl.style.setProperty("visibility", "visible", "important");
+    }
+
+    updateHeart();
+
+    heart.addEventListener("click", function () {
+        if (liked) {
+            count = Math.max(0, count - 1);
+            liked = false;
+        } else {
+            count++;
+            liked = true;
+        }
+
+        try {
+            localStorage.setItem(COUNT_KEY, String(count));
+            localStorage.setItem(LIKED_KEY, liked ? "yes" : "no");
+        } catch (error) {
+            console.error("Trust Likes save error:", error);
+        }
+
+        updateHeart();
+    });
+})();
+
+
+
+
+    </script>
+
+  <script>
+(function () {
+    function startCounters() {
+        const players = document.getElementById("activePlayersCount");
+
+        if (!players) {
+            console.error("Active Players counter not found!");
+            return;
+        }
+
+        const COUNT_KEY = "win24_active_players_count";
+        const INDEX_KEY = "win24_active_players_delay_index";
+        const NEXT_KEY = "win24_active_players_next_time";
+
+        const delays = [
+            10000,
+            15000,
+            20000,
+            30000,
+            40000,
+            50000,
+            60000
+        ];
+
+        let count = parseInt(
+            localStorage.getItem(COUNT_KEY) ||
+            players.textContent.replace(/,/g, ""),
+            10
+        );
+
+        if (!Number.isFinite(count)) count = 5213;
+
+        let index = parseInt(localStorage.getItem(INDEX_KEY) || "0", 10);
+        if (!Number.isFinite(index) || index < 0 || index >= delays.length) {
+            index = 0;
+        }
+
+        function render() {
+            players.textContent = count.toLocaleString("en-IN");
+            localStorage.setItem(COUNT_KEY, String(count));
+            localStorage.setItem(INDEX_KEY, String(index));
+        }
+
+        // Pehle se scheduled time guzar gaya ho to count catch up karo.
+        let nextTime = parseInt(localStorage.getItem(NEXT_KEY) || "0", 10);
+        const now = Date.now();
+
+        if (!nextTime) {
+            nextTime = now + delays[index];
+        } else {
+            let safety = 0;
+
+            while (now >= nextTime && safety < 10000) {
+                count++;
+                index = (index + 1) % delays.length;
+                nextTime += delays[index];
+                safety++;
+            }
+
+            if (nextTime <= now) {
+                nextTime = now + delays[index];
+            }
+        }
+
+        render();
+        localStorage.setItem(NEXT_KEY, String(nextTime));
+
+        // Duplicate timer ko rokna.
+        if (window.activePlayersTimer) {
+            clearTimeout(window.activePlayersTimer);
+        }
+
+        function scheduleNextCount() {
+            const wait = Math.max(0, nextTime - Date.now());
+
+            window.activePlayersTimer = setTimeout(function () {
+                count++;
+                index = (index + 1) % delays.length;
+
+                render();
+
+                nextTime = Date.now() + delays[index];
+                localStorage.setItem(NEXT_KEY, String(nextTime));
+
+                scheduleNextCount();
+            }, wait);
+        }
+
+        scheduleNextCount();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startCounters, {
+            once: true
+        });
+    } else {
+        startCounters();
+    }
+})();
+  </script>
+
+  <script>
+(function () {
+    function startDownloadsCounter() {
+        const downloads = document.getElementById("totalDownloadsCount");
+
+        if (!downloads) {
+            console.error("Total Community Downloads counter not found!");
+            return;
+        }
+
+        const COUNT_KEY = "win24_total_downloads_count";
+        const INDEX_KEY = "win24_total_downloads_delay_index";
+        const NEXT_KEY = "win24_total_downloads_next_time";
+
+        const delays = [
+            10000,
+            15000,
+            20000,
+            30000,
+            40000,
+            50000,
+            60000
+        ];
+
+        let count = parseInt(
+            localStorage.getItem(COUNT_KEY) ||
+            downloads.textContent.replace(/,/g, ""),
+            10
+        );
+
+        if (!Number.isFinite(count)) count = 5858;
+
+        let index = parseInt(localStorage.getItem(INDEX_KEY) || "0", 10);
+
+        if (!Number.isFinite(index) || index < 0 || index >= delays.length) {
+            index = 0;
+        }
+
+        function render() {
+            downloads.textContent = count.toLocaleString("en-IN");
+            localStorage.setItem(COUNT_KEY, String(count));
+            localStorage.setItem(INDEX_KEY, String(index));
+        }
+
+        let nextTime = parseInt(localStorage.getItem(NEXT_KEY) || "0", 10);
+        const now = Date.now();
+
+        if (!nextTime) {
+            nextTime = now + delays[index];
+        } else {
+            let safety = 0;
+
+            while (now >= nextTime && safety < 10000) {
+                count++;
+                index = (index + 1) % delays.length;
+                nextTime += delays[index];
+                safety++;
+            }
+
+            if (nextTime <= now) {
+                nextTime = now + delays[index];
+            }
+        }
+
+        render();
+        localStorage.setItem(NEXT_KEY, String(nextTime));
+
+        if (window.totalDownloadsTimer) {
+            clearTimeout(window.totalDownloadsTimer);
+        }
+
+        function scheduleNextCount() {
+            const wait = Math.max(0, nextTime - Date.now());
+
+            window.totalDownloadsTimer = setTimeout(function () {
+                count++;
+                index = (index + 1) % delays.length;
+
+                render();
+
+                nextTime = Date.now() + delays[index];
+                localStorage.setItem(NEXT_KEY, String(nextTime));
+
+                scheduleNextCount();
+            }, wait);
+        }
+
+        scheduleNextCount();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startDownloadsCounter, {
+            once: true
+        });
+    } else {
+        startDownloadsCounter();
+    }
+})();
+  </script>
+
+<script>
+(function () {
+    function fixCounters() {
+        const ids = [
+            "totalDownloadsCount",
+            "activePlayersCount",
+            "trustLikesCount"
+        ];
+
+        ids.forEach(function (id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            const target = parseInt(
+                el.textContent.replace(/[^\d]/g, ""),
+                10
+            );
+
+            if (!Number.isFinite(target)) return;
+
+            if (el.dataset.fixedCounter === "yes") return;
+            el.dataset.fixedCounter = "yes";
+
+            const duration = 1500;
+            const start = performance.now();
+
+            function update(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const value = Math.round(target * progress);
+
+                el.textContent = value.toLocaleString("en-US");
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.textContent = target.toLocaleString("en-US");
+                }
+            }
+
+            requestAnimationFrame(update);
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", fixCounters);
+    } else {
+        fixCounters();
+    }
+})();
+</script>
+
+  <div id="policyPopup" class="policy-overlay" aria-hidden="true">
+    <div class="policy-card" role="dialog" aria-modal="true" aria-labelledby="policyTitle">
+      <h2 id="policyTitle">About NONSTOP BATTLE</h2>
+      <div id="policyText" class="policy-text"></div>
+      <button type="button" onclick="closePolicyPopup()">CLOSE</button>
+    </div>
+  </div>
+
+  <script>
+const policyContent = {
+  about: {
+    title: "About NONSTOP BATTLE",
+    text: `🎮 WELCOME TO NONSTOP BATTLE
+
+NONSTOP BATTLE is an esports tournament platform designed for Free Fire MAX players who enjoy competitive gaming. Enter tournaments, sharpen your skills, challenge other players and enjoy the excitement of every match.
+
+🏆 WHAT MAKES US DIFFERENT?
+
+• Battle Royale and Clash Squad tournament experiences
+• Free and paid match options, where available
+• Simple tournament registration and match information
+• Updates about match schedules and results
+• Support for account and tournament-related questions
+• A community built around competition and fair play
+• Clear rules to help players understand each tournament
+
+🚀 OUR VISION
+
+We aim to make esports participation convenient, exciting and accessible. Our focus is on providing a smooth experience from registration to match completion.
+
+🎯 PLAY WITH PURPOSE
+
+Read the rules before joining any tournament and make sure your game details are correct. Every player is expected to compete honestly and respect fellow participants.
+
+💰 PRIZES & REWARDS
+
+Prizes and payouts depend on the specific tournament rules, result verification and applicable eligibility requirements. Participation does not guarantee a reward.
+
+🤝 OUR COMMITMENT
+
+We encourage respectful communication, fair competition and responsible use of the platform. We may improve our features and tournament experience over time.
+
+📩 NEED HELP?
+
+For questions or assistance, contact our support team on Telegram: @NonStopBattleSupport. Never share your password or OTP with anyone.`
+  },
+
+  privacy: {
+    title: "Privacy Policy",
+    text: `🔐 YOUR PRIVACY MATTERS
+
+NONSTOP BATTLE may collect limited information needed to operate the service, such as your username, phone number, game UID, transaction records and verification documents when necessary.
+
+📋 1. INFORMATION COLLECTION
+
+Information is collected when needed to manage your account, register you for matches, verify transactions or respond to support requests. Please provide accurate details to avoid account or payment issues.
+
+🛡️ 2. HOW INFORMATION IS USED
+
+We may use information to deliver services, maintain account security, prevent fraud, verify results and resolve disputes. We do not sell personal information.
+
+📱 3. COOKIES & LOCAL STORAGE
+
+Cookies and local storage may be used for session management, preferences and essential app functionality. Clearing local storage may sign you out or remove saved preferences.
+
+🔒 4. DATA SECURITY
+
+We take reasonable measures to protect stored information against unauthorised access or misuse. However, no online service can guarantee complete security.
+
+👤 5. YOUR RESPONSIBILITY
+
+Keep your login details private and use a secure device. Do not share passwords, OTPs or sensitive payment information through unofficial channels.
+
+🔎 6. THIRD-PARTY SERVICES
+
+Some features may rely on third-party services, such as payment providers or authentication systems. Their own privacy terms may also apply when you use those services.
+
+📝 7. POLICY UPDATES
+
+This policy may be revised as the platform changes or legal requirements evolve. Please review this page periodically for updates.
+
+📩 8. PRIVACY QUESTIONS
+
+For privacy enquiries or account-related requests, contact @NonStopBattleSupport on Telegram. We may need to verify your account before responding to certain requests.`
+  },
+
+  terms: {
+    title: "Terms & Conditions",
+    text: `📜 PLEASE READ BEFORE PLAYING
+
+By accessing or using NONSTOP BATTLE, you agree to these Terms & Conditions. Please review the applicable match rules before paying an entry fee or registering for a tournament.
+
+1. ACCEPTANCE
+
+Using the platform means you agree to follow these terms and the rules shown for each tournament. If you disagree, please stop using the relevant services.
+
+2. ELIGIBILITY
+
+Participants must meet applicable age requirements and local laws in their state or jurisdiction. Do not enter contests or make payments where participation is prohibited.
+
+3. ACCOUNT INFORMATION
+
+Provide accurate username, game UID and account details. You are responsible for activity through your account and should report suspected unauthorised access promptly.
+
+4. PAYMENTS & WITHDRAWALS
+
+Entry fees, prizes and withdrawal requirements depend on the details displayed for each match. Withdrawals are subject to balance, result and any required verification. The minimum withdrawal amount is ₹30 where applicable.
+
+5. MATCH REGISTRATION
+
+Check the mode, entry fee, start time, available slots and match instructions before joining. Incorrect details or failure to follow the instructions may affect participation.
+
+6. FAIR PLAY & ANTI-CHEAT
+
+Hacks, unauthorised modifications, exploitation, collusion, match manipulation and deliberate disruption are prohibited. Violations may lead to disqualification or account restrictions after review.
+
+7. RESULTS & PRIZES
+
+Results and rewards may require verification before payment. Where a genuine dispute or suspected fraud arises, processing may be delayed while the issue is reviewed.
+
+8. REFUNDS & CANCELLATIONS
+
+Refund requests are handled according to the Refund Policy, the relevant tournament terms and applicable law. Do not assume every deposit or entry fee is refundable.
+
+9. SERVICE AVAILABILITY
+
+Features may be temporarily unavailable due to maintenance, technical problems or security concerns. We will make reasonable efforts to restore affected services.
+
+10. MISUSE OF THE PLATFORM
+
+False claims, impersonation, abusive conduct and attempts to exploit platform features may result in restrictions. Serious or repeated violations may lead to account suspension.
+
+11. CHANGES TO TERMS
+
+These terms may be updated when necessary. The revised terms will apply as permitted by applicable law.
+
+12. SUPPORT
+
+For account, match or payment questions, contact @NonStopBattleSupport on Telegram. Keep transaction details available when reporting a payment issue.`
+  },
+
+  fairplay: {
+    title: "Fair Play Policy",
+    text: `🏆 PLAY FAIR. COMPETE WITH HONOUR.
+
+NONSTOP BATTLE encourages honest competition and respectful behaviour. Every participant must follow the official game rules, tournament instructions and applicable platform guidelines.
+
+1. FAIR PLAY RULES
+
+Hacks, mods, unauthorised scripts, prohibited emulators, teaming, collusion, cheating and match manipulation are not allowed. Follow the restrictions announced for the specific tournament.
+
+2. CHEATING & EXPLOITS
+
+Do not exploit bugs, use unfair advantages or interfere with other players. Report serious technical issues instead of using them to gain an advantage.
+
+3. ACCOUNT INTEGRITY
+
+Use your own permitted account and submit accurate game details. Fake IDs, impersonation and fabricated evidence may result in disqualification.
+
+4. RESPECT OTHER PLAYERS
+
+Threats, harassment, hateful messages and abusive behaviour toward players or support staff are prohibited. Keep communication respectful, even when a match result is disputed.
+
+5. INVESTIGATIONS & EVIDENCE
+
+Where a violation is suspected, available match records and submitted evidence may be reviewed. Players may be asked for relevant information to help clarify the incident.
+
+6. DISQUALIFICATION & SUSPENSION
+
+Confirmed violations may result in match disqualification, temporary suspension or a permanent ban, depending on the seriousness of the incident and applicable rules.
+
+7. REWARDS & VIOLATIONS
+
+Rewards connected to a disputed match may be held while a genuine investigation is completed. Any final action will be handled under the applicable tournament rules and law.
+
+8. FALSE REPORTS
+
+Do not submit knowingly false complaints or misleading evidence against other players. Genuine concerns should be reported with clear details.
+
+9. PLAYER RESPONSIBILITY
+
+Check the tournament rules before joining and ensure your device and game setup comply with the stated requirements. You are responsible for following the rules during the match.
+
+📩 REPORT A VIOLATION
+
+Send relevant match details and evidence to @NonStopBattleSupport on Telegram. Never share your password or OTP when submitting a report.`
+  },
+
+  refund: {
+    title: "Refund Policy",
+    text: `💳 REFUNDS, DEPOSITS & PAYOUTS
+
+This policy explains how NONSTOP BATTLE reviews deposit issues, tournament cancellations and payout disputes. Eligibility depends on the transaction, tournament rules and applicable law.
+
+1. DEPOSIT REFUNDS
+
+Deposits are generally final and non-refundable, except where a refund is required by applicable law or approved after investigation. For duplicate charges or verified technical errors, contact @NonStopBattleSupport with transaction details.
+
+2. WINNINGS & PAYOUT DISPUTES
+
+Winnings are processed after result verification. The minimum withdrawal amount is ₹30 where applicable. A payment may be temporarily held while a genuine system error, suspicious activity or fraud report is investigated.
+
+3. CANCELLED MATCHES
+
+If a match is cancelled due to a verified technical issue or another reason covered by the tournament rules, an eligible entry-fee refund may be credited to your NONSTOP BATTLE wallet or handled as required by law.
+
+4. NO-SHOWS & RULE VIOLATIONS
+
+Refunds are generally not provided for missing a match, entering incorrect details or violating tournament rules, subject to applicable law and the specific match terms.
+
+5. DUPLICATE OR FAILED TRANSACTIONS
+
+If you believe you were charged twice or a transaction failed despite money being deducted, submit the transaction reference, amount, date and relevant payment evidence for review.
+
+6. HOW TO REQUEST A REVIEW
+
+Provide your username, transaction ID, amount, transaction date and a clear explanation of the issue. Never send your password, OTP or complete payment credentials.
+
+7. REVIEW & PROCESSING
+
+Our support team may request additional information to verify a claim. Processing time can vary depending on the payment provider and the complexity of the investigation.
+
+📩 REFUND SUPPORT
+
+For deposit or payout concerns, contact @NonStopBattleSupport on Telegram. Refund eligibility is assessed under the applicable terms and laws.`
+  }
+};
+
+  function openPolicyPopup(key) {
+    const policy = policyContent[key];
+
+    if (!policy) return;
+
+    const popup = document.getElementById("policyPopup");
+    const title = document.getElementById("policyTitle");
+    const text = document.getElementById("policyText");
+
+    if (!popup || !title || !text) {
+        alert("Policy popup HTML nahi mila. Step 3 check karo.");
+        return;
+    }
+
+    title.textContent = policy.title;
+    text.textContent = policy.text;
+
+    popup.style.display = "flex";
+
+    const menu = document.getElementById("siteMenuPanel");
+    const menuButton = document.getElementById("siteMenuButton");
+
+    if (menu) menu.classList.remove("open");
+    if (menuButton) {
+        menuButton.setAttribute("aria-expanded", "false");
+    }
+}
+
+function closePolicyPopup() {
+    const popup = document.getElementById("policyPopup");
+    if (popup) popup.style.display = "none";
+}
+  </script>
+
+  
+
+<video
+  id="siteBackgroundVideo"
+  autoplay
+  muted
+  loop
+  playsinline
+  webkit-playsinline
+  preload="auto"
+  disablepictureinpicture
+  controlslist="nodownload nofullscreen noremoteplayback"
+>
+  <source src="https://www.image2url.com/r2/default/videos/1794313655813-2711a7a2-2ff2-4253-9720-0ca96c583af9.mp4" type="video/mp4">
+</video>
+
+  <script>
+(function () {
+    function startBackgroundVideo() {
+        const video = document.getElementById("siteBackgroundVideo");
+        if (!video) return;
+
+        // Hide all video controls
+        video.controls = false;
+        video.removeAttribute("controls");
+        video.setAttribute("controlslist", "nodownload nofullscreen noremoteplayback");
+
+        // Autoplay settings
+        video.muted = true;
+        video.defaultMuted = true;
+        video.autoplay = true;
+        video.loop = true;
+        video.playsInline = true;
+
+        video.setAttribute("muted", "");
+        video.setAttribute("autoplay", "");
+        video.setAttribute("loop", "");
+        video.setAttribute("playsinline", "");
+        video.setAttribute("webkit-playsinline", "");
+
+        // Start playback without showing controls
+        function startVideo() {
+            video.controls = false;
+
+            if (video.paused && !video.ended) {
+                const playPromise = video.play();
+
+                if (playPromise && playPromise.catch) {
+                    playPromise.catch(function () {
+                        // Browser may restrict autoplay.
+                        // Retry when the page becomes visible.
+                    });
+                }
+            }
+        }
+
+        // Start as soon as enough video data is available
+        video.addEventListener("loadeddata", startVideo);
+        video.addEventListener("canplay", startVideo);
+        video.addEventListener("playing", function () {
+            video.controls = false;
+            video.removeAttribute("controls");
+        });
+
+        // Retry after the browser reports a playback interruption
+        video.addEventListener("pause", function () {
+            if (!document.hidden) {
+                setTimeout(startVideo, 300);
+            }
+        });
+
+        // Retry when returning to the page
+        document.addEventListener("visibilitychange", function () {
+            if (!document.hidden) {
+                startVideo();
+            }
+        });
+
+        // Do not reload the video repeatedly; that can cause stuttering.
+        startVideo();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            startBackgroundVideo,
+            { once: true }
+        );
+    } else {
+        startBackgroundVideo();
+    }
+})();
+      </script>
+
+
+</body>
+</html>
